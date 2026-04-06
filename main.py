@@ -10,7 +10,7 @@ WORD_LIST = [w for w in spell.word_frequency.keys() if len(w) == 5]
 
 while True:  # Main game loop for restarting
     TARGET = random.choice(WORD_LIST)
-    MAX_TRIES = 6 #jumlah percobaan
+    MAX_TRIES = 5 #jumlah percobaan
 
     print("Wordle-like game: guess the 5-letter word (type 'quit' to exit)")
 
