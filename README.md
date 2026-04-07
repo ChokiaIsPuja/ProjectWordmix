@@ -116,6 +116,11 @@ if MAX_TRIES == 0:
 
 ```
 ## Screenshots
+<img width="306" height="224" alt="image" src="https://github.com/user-attachments/assets/a6426dd3-853a-4726-8b43-c8e65c039d70" />
+
+
+<img width="176" height="59" alt="image" src="https://github.com/user-attachments/assets/bc2c9ed7-5980-4937-af83-c78998520f36" />
+
 
 
 ## 👤 Author
