@@ -1,30 +1,50 @@
 import random
 from spellchecker import SpellChecker
 
-#bahasa
+# initialize spellchecker
 spell = SpellChecker(language='en')
 
-
-#array word yang memiliki panjang 5 karakter dari kamus spellchecker
+# 5-letter word list
 WORD_LIST = [w for w in spell.word_frequency.keys() if len(w) == 5]
 
-while True:  # Main game loop for restarting
+while True:
     TARGET = random.choice(WORD_LIST)
-    MAX_TRIES = 5 #jumlah percobaan
+    MAX_TRIES = 5
 
-    print("Wordle-like game: guess the 5-letter word (type 'quit' to exit)")
+    # STACK (list in python)
+    stack = []
+
+    print("Wordle-like game with STACK system")
+    print("Commands: 'undo' to remove last guess, 'quit' to exit")
 
     while MAX_TRIES > 0:
         guess = input(f"{MAX_TRIES} tries left. Enter guess: ").strip().lower()
+
         if guess == "quit":
             print("Quit. Bye!")
-            exit()  # Exit the entire program
+            exit()
+
+        # POP (undo)
+        if guess == "undo":
+            if stack:
+                removed = stack.pop()
+                MAX_TRIES += 1
+                print(f"Removed last guess: {removed}")
+            else:
+                print("Stack empty, nothing to undo.")
+            continue
+
+        # validation
         if len(guess) != 5 or not guess.isalpha():
             print("Please enter exactly 5 alphabetic characters.")
             continue
+
         if guess not in WORD_LIST:
             print("Word not in allowed 5-letter dictionary.")
             continue
+
+        # PUSH
+        stack.append(guess)
 
         # letter grading
         feedback = []
@@ -49,6 +69,12 @@ while True:  # Main game loop for restarting
 
         print(f"{guess} -> {''.join(feedback)}")
 
+        # PEEK
+        print("Last guess (PEEK):", stack[-1])
+
+        # DISPLAY
+        print("All guesses (STACK):", stack)
+
         if guess == TARGET:
             print("🎉 Correct! You win!")
             break
@@ -58,7 +84,6 @@ while True:  # Main game loop for restarting
     if MAX_TRIES == 0:
         print(f"Game over. The word was: {TARGET}")
 
-    # Ask to play again
     play_again = input("Play again? (y/n): ").strip().lower()
     if play_again != 'y':
         print("Thanks for playing!")
